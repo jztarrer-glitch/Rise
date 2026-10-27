@@ -1,0 +1,370 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<title>Rise by Shemaqa</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="no-referrer">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Limelight&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Josefin+Sans:wght@400;600;700&display=swap">
+<style>
+/* Layout: an Egyptian-revival record sleeve at sunrise. Cover + title over gold sun rays, a numbered running order with lyrics folded under each song, liner notes as a letter, and a fixed player bar along the bottom. */
+:root{
+  --sand:#ecdcbc; --sand-2:#e2cca2; --paper:#f4e9d2;
+  --ink:#2a1b10; --ink-soft:#6a4f33;
+  --crown:#a3302a; --nile:#2c6688; --gold:#b07d22; --turq:#2f7f78;
+  --line:rgba(76,48,22,.22); --rays:rgba(176,125,34,.11);
+  --player:#2a1b10; --player-fg:#f1e2c3; --player-soft:#c7ab80;
+  --display:"Limelight","Didot","Bodoni 72",Georgia,serif;
+  --body:"Spectral",Georgia,"Times New Roman",serif;
+  --label:"Josefin Sans","Futura","Century Gothic",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --sand:#1d140d; --sand-2:#271b11; --paper:#2a1e14;
+  --ink:#f0e0c0; --ink-soft:#c1a37a;
+  --crown:#e0675a; --nile:#7db4d6; --gold:#dcaa4c; --turq:#6cc0b5;
+  --line:rgba(236,210,160,.16); --rays:rgba(220,170,76,.13);
+  --player:#0f0a06; --player-fg:#f1e2c3; --player-soft:#b8996c;
+  color-scheme:dark }}
+:root[data-theme="dark"]{
+  --sand:#1d140d; --sand-2:#271b11; --paper:#2a1e14;
+  --ink:#f0e0c0; --ink-soft:#c1a37a;
+  --crown:#e0675a; --nile:#7db4d6; --gold:#dcaa4c; --turq:#6cc0b5;
+  --line:rgba(236,210,160,.16); --rays:rgba(220,170,76,.13);
+  --player:#0f0a06; --player-fg:#f1e2c3; --player-soft:#b8996c;
+  color-scheme:dark }
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--sand);color:var(--ink);font-family:var(--body);font-size:1.0625rem;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+.wrap{max-width:1040px;margin:0 auto}
+a{color:var(--nile)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+
+/* frieze border, a stepped deco band */
+.frieze{height:14px;margin:0 auto;max-width:1040px;
+  background:
+   linear-gradient(90deg,var(--crown) 0 12px,transparent 12px 16px,var(--nile) 16px 28px,transparent 28px 32px,var(--gold) 32px 44px,transparent 44px 48px) 0 0/48px 6px repeat-x,
+   linear-gradient(var(--gold),var(--gold)) 0 10px/100% 2px no-repeat}
+
+/* hero */
+.hero{position:relative;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(24px,5vw,64px);align-items:center;padding-block:clamp(28px,6vw,64px) clamp(32px,6vw,56px);overflow:hidden}
+.hero::before{content:"";position:absolute;left:62%;bottom:-40%;width:150%;aspect-ratio:1;transform:translateX(-50%);border-radius:50%;
+  background:repeating-conic-gradient(from -90deg,var(--rays) 0 4deg,transparent 4deg 10deg);
+  -webkit-mask:radial-gradient(circle,transparent 0 9%,#000 9.2% 60%,transparent 70%);mask:radial-gradient(circle,transparent 0 9%,#000 9.2% 60%,transparent 70%);
+  z-index:0;pointer-events:none}
+.hero>*{position:relative;z-index:1;min-width:0}
+.cover{margin:0;justify-self:center;max-width:420px;width:100%}
+.cover img{display:block;width:100%;height:auto;aspect-ratio:765/1024;object-fit:cover;border:1px solid var(--gold);outline:6px solid var(--paper);box-shadow:0 0 0 7px var(--gold),0 24px 50px -18px rgba(42,27,16,.55)}
+.eyebrow{font-family:var(--label);text-transform:uppercase;letter-spacing:.22em;font-size:.78rem;font-weight:600;color:var(--crown);margin:0 0 .6rem}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(5rem,16vw,10.5rem);line-height:.86;letter-spacing:.04em;margin:0;color:var(--ink);text-wrap:balance}
+h1 .sun{color:var(--gold)}
+.artist{font-family:var(--label);font-size:clamp(1.15rem,2.4vw,1.5rem);letter-spacing:.32em;text-transform:uppercase;margin:.9rem 0 0;font-weight:600}
+.meta{font-family:var(--label);letter-spacing:.08em;color:var(--ink-soft);margin:.4rem 0 1.6rem;font-size:.9rem;font-variant-numeric:tabular-nums}
+.actions{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:.6rem;border:0;cursor:pointer;font-family:var(--label);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.85rem;padding:.95rem 1.4rem .85rem;border-radius:999px;background:var(--crown);color:#fff6e6;transition:transform .15s ease,filter .15s}
+.btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.btn{text-decoration:none}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn svg{width:16px;height:16px;fill:currentColor}
+.dedi{font-style:italic;color:var(--ink-soft);margin:1.6rem 0 0;max-width:34ch}
+
+/* sections */
+section{padding-block:clamp(32px,6vw,56px)}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;flex-wrap:wrap;border-bottom:2px solid var(--gold);padding-bottom:.6rem;margin-bottom:.4rem}
+h2{font-family:var(--display);font-weight:400;font-size:clamp(1.9rem,4vw,2.6rem);margin:0;letter-spacing:.03em}
+.sec-head p{margin:0;font-family:var(--label);letter-spacing:.14em;text-transform:uppercase;font-size:.75rem;color:var(--ink-soft)}
+
+/* track list */
+ol.tracks{list-style:none;margin:0;padding:0}
+.track{border-bottom:1px solid var(--line)}
+.row{display:grid;grid-template-columns:2.6rem minmax(0,1fr) auto auto;align-items:center;gap:.75rem;padding:.7rem .25rem}
+.num{font-family:var(--label);font-weight:600;font-variant-numeric:tabular-nums;color:var(--ink-soft);font-size:.95rem;text-align:right;position:relative;height:1.4rem}
+.num span{position:absolute;right:0;top:.1rem}
+.num .eq{display:none;right:0;top:.15rem;gap:2px;align-items:flex-end;height:1rem}
+.eq i{display:block;width:3px;background:var(--crown);animation:eq .9s ease-in-out infinite alternate}
+.eq i:nth-child(2){animation-delay:-.3s}.eq i:nth-child(3){animation-delay:-.6s}
+@keyframes eq{from{height:20%}to{height:100%}}
+.track.playing .num .n{display:none}.track.playing .num .eq{display:flex}
+.track.paused .eq i{animation-play-state:paused}
+.play-row{all:unset;cursor:pointer;display:flex;flex-direction:column;min-width:0;border-radius:4px}
+.play-row:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.t-title{font-size:1.2rem;font-weight:500;line-height:1.3;overflow-wrap:anywhere}
+.track.playing .t-title{color:var(--crown)}
+.track.inst .t-title{font-style:italic;color:var(--ink-soft)}
+.tag{font-family:var(--label);text-transform:uppercase;letter-spacing:.14em;font-size:.68rem;color:var(--turq);font-weight:600}
+.dur{font-family:var(--label);font-variant-numeric:tabular-nums;color:var(--ink-soft);font-size:.9rem}
+.lyr-btn{cursor:pointer;border:0;background:transparent;font-family:var(--label);font-weight:600;letter-spacing:.12em;text-transform:uppercase;font-size:.72rem;color:var(--nile);padding:.5rem .6rem;border-radius:999px}
+.lyr-btn:hover{background:var(--sand-2)}
+.lyr-btn[aria-expanded="true"]{color:var(--crown)}
+.lyr-btn.none{visibility:hidden}
+.lyrics{padding:.2rem 0 1.8rem 3.35rem;columns:2 22rem;column-gap:3rem}
+.lyrics p{margin:0 0 1.1rem;break-inside:avoid-column}
+.lyrics .l{display:block}
+.lyrics .hook{font-style:italic;color:var(--crown)}
+
+/* liner notes */
+.notes{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,16rem);gap:clamp(24px,5vw,56px);align-items:start;margin-top:1.4rem}
+.letter{max-width:66ch}
+.letter p{margin:0 0 1.1rem}
+.letter p:first-child::first-letter{font-family:var(--display);float:left;font-size:3.6rem;line-height:.85;padding:.3rem .5rem 0 0;color:var(--crown)}
+.letter .sign{font-family:var(--display);font-size:1.8rem;color:var(--gold);margin-top:1.4rem}
+aside.family{background:var(--paper);border:1px solid var(--line);padding:1.4rem 1.4rem 1.2rem;position:relative}
+aside.family::before{content:"";position:absolute;inset:5px;border:1px solid var(--gold);pointer-events:none;opacity:.6}
+aside.family h3{font-family:var(--label);text-transform:uppercase;letter-spacing:.2em;font-size:.75rem;color:var(--crown);margin:0 0 .9rem}
+aside.family ul{list-style:none;margin:0;padding:0;display:grid;gap:.55rem}
+aside.family li{font-size:1.05rem;line-height:1.3}
+aside.family li small{display:block;font-family:var(--label);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
+aside.family .credits{margin-top:1.2rem;padding-top:1rem;border-top:1px solid var(--line);font-size:.92rem;color:var(--ink-soft)}
+footer{text-align:center;padding-block:2rem 1rem;font-family:var(--label);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+
+/* player */
+.player{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--player);color:var(--player-fg);
+  padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));
+  border-top:3px solid var(--gold);box-shadow:0 -10px 30px -12px rgba(0,0,0,.45)}
+.p-inner{max-width:1040px;margin:0 auto;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center}
+.p-art{width:48px;height:48px;object-fit:cover;object-position:50% 18%;border:1px solid var(--gold)}
+.p-info{min-width:0}
+.p-title{font-family:var(--body);font-weight:600;font-size:1.02rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.p-sub{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:var(--label);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--player-soft)}
+.p-seek{display:flex;align-items:center;gap:10px;margin-top:4px;font-family:var(--label);font-size:.75rem;font-variant-numeric:tabular-nums;color:var(--player-soft)}
+.p-seek input{flex:1;min-width:0;accent-color:var(--gold);height:18px}
+.p-ctrls{display:flex;align-items:center;gap:4px}
+.ic{cursor:pointer;border:0;background:transparent;color:var(--player-fg);width:40px;height:40px;border-radius:50%;display:grid;place-items:center}
+.ic:hover{background:rgba(255,255,255,.08)}
+.ic svg{width:20px;height:20px;fill:currentColor}
+.ic.main{width:48px;height:48px;background:var(--gold);color:#22160c}
+.ic.main:hover{background:var(--gold);filter:brightness(1.1)}
+.ic.main svg{width:22px;height:22px}
+
+@media (max-width:760px){
+  .hero{grid-template-columns:minmax(0,1fr);text-align:center}
+  .hero::before{left:50%;bottom:auto;top:30%}
+  .cover{max-width:300px}
+  .actions{justify-content:center}
+  .dedi{margin-inline:auto}
+  .notes{grid-template-columns:minmax(0,1fr)}
+  .lyrics{padding-left:.25rem}
+  .row{grid-template-columns:2rem minmax(0,1fr) auto;gap:.5rem}
+  .dur{display:none}
+  .p-art{display:none}
+  .p-inner{grid-template-columns:minmax(0,1fr) auto}
+  .p-ctrls .ic.skip{width:36px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+
+html{color-scheme:light}
+body{margin:0;-webkit-font-smoothing:antialiased;padding-top:env(safe-area-inset-top,0px)}
+img{max-width:100%}
+[hidden]{display:none!important}
+.lock{display:grid;gap:.7rem;max-width:22rem}
+.lock label{font-family:var(--label);text-transform:uppercase;letter-spacing:.16em;font-size:.75rem;font-weight:600;color:var(--ink-soft)}
+.lock .field{display:flex;gap:8px;flex-wrap:wrap}
+.lock input[type=password]{flex:1 1 11rem;min-width:0;font:inherit;font-size:1.05rem;padding:.75rem .9rem;border:1.5px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink)}
+.lock input[type=password]:focus{outline:2px solid var(--gold);outline-offset:1px}
+.lock .remember{display:flex;align-items:center;gap:.5rem;font-size:.95rem;color:var(--ink-soft)}
+.lock .err{color:var(--crown);font-size:.95rem;min-height:1.4em;margin:0}
+.locked-note{font-style:italic;color:var(--ink-soft);margin:0}
+body.is-locked .player{display:none}
+body.is-locked{padding-bottom:env(safe-area-inset-bottom,0px)}
+.forget{background:none;border:0;cursor:pointer;color:inherit;text-decoration:underline;font:inherit;letter-spacing:inherit;text-transform:inherit;padding:0}
+@media (max-width:760px){.lock{margin-inline:auto;text-align:left}}
+</style>
+</head><body class="is-locked">
+<div class="frieze" aria-hidden="true"></div>
+<div class="wrap">
+<header class="hero">
+  <figure class="cover"><img src="cover.jpg" width="765" height="1024" alt="Album cover for Rise: a falcon-headed figure in the red and white double crown stands with a spear between temple columns above the Nile, a bound hippopotamus at his feet."></figure>
+  <div>
+    <p class="eyebrow">A family album &middot; November 2026</p>
+    <h1>R<span class="sun">i</span>se</h1>
+    <p class="artist">Shemaqa</p>
+    <p class="meta">16 tracks &middot; 49 min &middot; recorded 2022&ndash;2026</p>
+    <form class="lock" id="lock" autocomplete="off">
+      <label for="pass">Family passcode</label>
+      <div class="field"><input id="pass" type="password" autocomplete="current-password" required><button class="btn" id="unlockBtn" type="submit">Open</button></div>
+      <span class="remember"><input id="remember" type="checkbox" checked><label for="remember" style="all:unset;cursor:pointer">Remember on this device</label></span>
+      <p class="err" id="err" role="alert"></p>
+    </form>
+    <div id="unlocked" hidden>
+      <div class="actions">
+        <button class="btn" id="playAll" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg><span>Play the album</span></button>
+        <a class="btn ghost" href="#notes">Liner notes</a>
+      </div>
+      <p class="dedi">&ldquo;Wrote this down for my seeds and my brethren.&rdquo;</p>
+    </div>
+  </div>
+</header>
+<div id="content" hidden>
+<section id="tracks" aria-labelledby="tl-h">
+  <div class="sec-head"><h2 id="tl-h">Running Order</h2><p>Tap a title to play &middot; open the lyrics to read along</p></div>
+  <ol class="tracks" id="list"></ol>
+</section>
+<section id="notes" aria-labelledby="ln-h">
+  <div class="sec-head"><h2 id="ln-h">Liner Notes</h2><p>From Shemaqa</p></div>
+  <div class="notes">
+    <div class="letter" id="letter"></div>
+    <aside class="family" aria-label="Dedication">
+      <h3>Dedicated to</h3>
+      <ul id="family"></ul>
+      <div class="credits">Written, arranged and produced by Shemaqa in GarageBand and Logic Pro. Lyrics 2014 and 2022&ndash;2026.</div>
+    </aside>
+  </div>
+</section>
+</div>
+<footer>Rise &middot; Shemaqa &middot; For the family. Please keep the link and passcode among us. <span id="forgetWrap" hidden>&middot; <button class="forget" id="forget" type="button">Lock this device</button></span></footer>
+</div>
+<div class="frieze" aria-hidden="true"></div>
+<div class="player" role="region" aria-label="Player">
+  <div class="p-inner">
+    <img class="p-art" src="cover.jpg" alt="" width="48" height="48">
+    <div class="p-info">
+      <div class="p-title" id="pTitle">Rise</div>
+      <div class="p-sub" id="pSub">Shemaqa &middot; press play to begin</div>
+      <div class="p-seek"><span id="pCur">0:00</span><input id="pSeek" type="range" min="0" max="100" step="0.1" value="0" aria-label="Seek"><span id="pDur">0:00</span></div>
+    </div>
+    <div class="p-ctrls">
+      <button class="ic skip" id="pPrev" type="button" aria-label="Previous track"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg></button>
+      <button class="ic main" id="pPlay" type="button" aria-label="Play"><svg viewBox="0 0 24 24" aria-hidden="true"><path id="pIcon" d="M7 4.5v15l13-7.5z"/></svg></button>
+      <button class="ic skip" id="pNext" type="button" aria-label="Next track"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 5h2v14h-2zM4 5v14l11-7z"/></svg></button>
+    </div>
+  </div>
+</div>
+<audio id="audio" preload="auto" playsinline></audio>
+<script>
+const CFG={"salt": "QF4Hx4L9BkZyG2EQFyFFHw==", "iter": 250000};
+(function(){
+const $=id=>document.getElementById(id);
+const b64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+const STORE='rise-passcode';
+const store={get(){try{return localStorage.getItem(STORE)}catch(e){return null}},set(v){try{localStorage.setItem(STORE,v)}catch(e){}},del(){try{localStorage.removeItem(STORE)}catch(e){}}};
+let KEY=null, TRACKS=[];
+
+async function deriveKey(pw){
+  const base=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw.trim().toLowerCase()),'PBKDF2',false,['deriveKey']);
+  return crypto.subtle.deriveKey({name:'PBKDF2',salt:b64(CFG.salt),iterations:CFG.iter,hash:'SHA-256'},base,{name:'AES-GCM',length:256},false,['decrypt']);
+}
+async function fetchDec(url){
+  const r=await fetch(url); if(!r.ok) throw new Error('fetch '+r.status);
+  const buf=new Uint8Array(await r.arrayBuffer());
+  return crypto.subtle.decrypt({name:'AES-GCM',iv:buf.slice(0,12)},KEY,buf.slice(12));
+}
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const inline=s=>esc(s).replace(/\*(.+?)\*/g,'<em>$1</em>');
+const fmt=s=>{s=Math.max(0,Math.floor(s||0));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');};
+
+async function unlock(pw,remember){
+  if(!window.crypto||!crypto.subtle){ $('err').textContent='This browser can’t open the album. Please try an up-to-date Chrome, Safari or Firefox.'; return false; }
+  KEY=await deriveKey(pw);
+  let data;
+  try{ data=JSON.parse(new TextDecoder().decode(await fetchDec('data/album.bin'))); }
+  catch(e){ KEY=null; return false; }
+  if(remember) store.set(pw);
+  render(data); return true;
+}
+
+function render(data){
+  TRACKS=data.tracks;
+  const PLAY='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg>';
+  $('list').innerHTML=TRACKS.map((t,i)=>{
+    const n=i+1, inst=!t.lyrics;
+    const lyr=inst?'':`<div class="lyrics" id="lyr-${n}" hidden>${t.lyrics.map(st=>'<p>'+st.map(([l,h])=>`<span class="l${h?' hook':''}">${esc(l)}</span>`).join('')+'</p>').join('')}</div>`;
+    return `<li class="track${inst?' inst':''}" data-i="${i}"><div class="row"><div class="num"><span class="n">${n}</span><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span></div>
+<button class="play-row" type="button" aria-label="Play ${esc(t.title)}"><span class="t-title">${esc(t.title)}</span>${inst?'<span class="tag">Instrumental</span>':''}</button>
+<span class="dur">${fmt(t.dur)}</span>
+${inst?'<button class="lyr-btn none" type="button" tabindex="-1" aria-hidden="true">Lyrics</button>':`<button class="lyr-btn" type="button" aria-expanded="false" aria-controls="lyr-${n}">Lyrics</button>`}</div>${lyr}</li>`;
+  }).join('');
+  const notes=data.notes;
+  $('letter').innerHTML=notes.slice(0,-1).map(p=>`<p>${inline(p)}</p>`).join('')+`<p class="sign">${esc(notes[notes.length-1])}</p>`;
+  $('family').innerHTML='<li>Sanut Nerut<small>Beloved wife</small></li>'+['Ser Bata Sekher','Saakhu Maa','Sherihetep','Saaungkh Maa Kheru','Saher Shauari'].map(x=>`<li>${x}</li>`).join('');
+  $('lock').hidden=true; $('unlocked').hidden=false; $('content').hidden=false;
+  document.body.classList.remove('is-locked');
+  $('forgetWrap').hidden=!store.get();
+  wirePlayer();
+}
+
+/* ---------- player ---------- */
+function wirePlayer(){
+  const a=$('audio');
+  const items=[...document.querySelectorAll('.track')];
+  const PLAYP='M7 4.5v15l13-7.5z', PAUSE='M6 4.5h4v15H6zM14 4.5h4v15h-4z';
+  const cache=new Map(); // index -> Promise<objectURL>
+  let cur=-1, seeking=false, want=false, primed=false, loadSeq=0;
+
+  // A short silent clip, played inside the tap, lets phones keep playing after the decrypt step.
+  const silent=(()=>{const sr=8000,n=800,b=new ArrayBuffer(44+n*2),v=new DataView(b);const w=(o,s)=>[...s].forEach((c,k)=>v.setUint8(o+k,c.charCodeAt(0)));
+    w(0,'RIFF');v.setUint32(4,36+n*2,true);w(8,'WAVE');w(12,'fmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);v.setUint32(24,sr,true);v.setUint32(28,sr*2,true);v.setUint16(32,2,true);v.setUint16(34,16,true);w(36,'data');v.setUint32(40,n*2,true);
+    return URL.createObjectURL(new Blob([b],{type:'audio/wav'}));})();
+  function prime(){ if(primed) return; primed=true; try{ a.src=silent; const p=a.play(); if(p&&p.catch)p.catch(()=>{}); }catch(e){} }
+
+  function get(i){
+    if(!cache.has(i)){
+      const p=fetchDec(TRACKS[i].src).then(buf=>URL.createObjectURL(new Blob([buf],{type:'audio/mp4'})));
+      p.catch(()=>cache.delete(i)); cache.set(i,p);
+    }
+    for(const k of [...cache.keys()]) if(Math.abs(k-i)>1 && k!==i+1){ cache.get(k).then(u=>URL.revokeObjectURL(u)).catch(()=>{}); cache.delete(k); }
+    return cache.get(i);
+  }
+  async function play(i){
+    if(i===undefined){ if(cur<0) i=0; else { want=true; a.play().catch(()=>{}); return; } }
+    i=(i+TRACKS.length)%TRACKS.length; cur=i; want=true; const seq=++loadSeq;
+    const t=TRACKS[i];
+    $('pTitle').textContent=t.title; $('pSub').textContent='Loading…';
+    $('pDur').textContent=fmt(t.dur); $('pSeek').value=0; $('pCur').textContent='0:00';
+    items.forEach((el,k)=>el.classList.toggle('playing',k===i));
+    try{ if('mediaSession' in navigator) navigator.mediaSession.metadata=new MediaMetadata({title:t.title,artist:'Shemaqa',album:'Rise',artwork:[{src:'cover.jpg',sizes:'765x1024',type:'image/jpeg'}]}); }catch(e){}
+    let url;
+    try{ url=await get(i); }catch(e){ if(seq===loadSeq) $('pSub').textContent='Couldn’t load this track. Check your connection and tap play again.'; return; }
+    if(seq!==loadSeq) return;
+    a.src=url; $('pSub').textContent='Track '+(i+1)+' of '+TRACKS.length+' · Shemaqa';
+    a.play().catch(()=>{ sync(); });
+    if(i+1<TRACKS.length) get(i+1).catch(()=>{});
+  }
+  function toggle(){ prime(); if(cur<0||a.paused) play(); else { want=false; a.pause(); } }
+  function sync(){
+    const on=!a.paused && a.src!==silent;
+    $('pIcon').setAttribute('d',on?PAUSE:PLAYP); $('pPlay').setAttribute('aria-label',on?'Pause':'Play');
+    items.forEach((el,k)=>el.classList.toggle('paused',k===cur&&!on));
+    const pa=$('playAll'); pa.querySelector('span').textContent=on?'Pause':(cur<0?'Play the album':'Resume');
+    pa.querySelector('path').setAttribute('d',on?PAUSE:PLAYP);
+  }
+  a.addEventListener('play',sync); a.addEventListener('pause',sync);
+  a.addEventListener('ended',()=>{ if(a.src===silent) return; if(cur<TRACKS.length-1) play(cur+1); else { want=false; sync(); } });
+  a.addEventListener('loadedmetadata',()=>{ if(a.src!==silent && isFinite(a.duration)) $('pDur').textContent=fmt(a.duration); });
+  a.addEventListener('timeupdate',()=>{ if(seeking||!a.duration||a.src===silent) return; $('pSeek').value=(a.currentTime/a.duration*100)||0; $('pCur').textContent=fmt(a.currentTime); });
+  const sk=$('pSeek');
+  sk.addEventListener('input',()=>{ seeking=true; if(a.duration) $('pCur').textContent=fmt(sk.value/100*a.duration); });
+  sk.addEventListener('change',()=>{ if(a.duration&&a.src!==silent) a.currentTime=sk.value/100*a.duration; seeking=false; });
+  $('pPlay').addEventListener('click',toggle);
+  $('playAll').addEventListener('click',toggle);
+  $('pPrev').addEventListener('click',()=>{ prime(); if(a.currentTime>4&&cur>=0) a.currentTime=0; else play(Math.max(0,cur-1)); });
+  $('pNext').addEventListener('click',()=>{ prime(); play(cur+1); });
+  items.forEach((el,k)=>{
+    el.querySelector('.play-row').addEventListener('click',()=>{ prime(); if(k===cur) toggle(); else play(k); });
+    const b=el.querySelector('.lyr-btn:not(.none)');
+    if(b) b.addEventListener('click',()=>{ const box=document.getElementById(b.getAttribute('aria-controls')); const open=box.hidden; box.hidden=!open; b.setAttribute('aria-expanded',String(open)); b.textContent=open?'Close':'Lyrics'; });
+  });
+  try{ if('mediaSession' in navigator){
+    navigator.mediaSession.setActionHandler('play',()=>play());
+    navigator.mediaSession.setActionHandler('pause',()=>a.pause());
+    navigator.mediaSession.setActionHandler('previoustrack',()=>play(Math.max(0,cur-1)));
+    navigator.mediaSession.setActionHandler('nexttrack',()=>play(cur+1));
+  } }catch(e){}
+}
+
+/* ---------- lock screen ---------- */
+$('lock').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const btn=$('unlockBtn'); btn.disabled=true; btn.textContent='Opening…'; $('err').textContent='';
+  const ok=await unlock($('pass').value,$('remember').checked).catch(()=>false);
+  btn.disabled=false; btn.textContent='Open';
+  if(!ok && !$('err').textContent){ $('err').textContent='That passcode didn’t match. Check it and try again.'; $('pass').select(); }
+});
+$('forget').addEventListener('click',()=>{ store.del(); location.reload(); });
+const saved=store.get();
+if(saved){ unlock(saved,true).then(ok=>{ if(!ok) store.del(); }).catch(()=>store.del()); }
+})();
+
+</script>
+</body></html>
